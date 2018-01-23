@@ -22,14 +22,20 @@ public class PureWinium {
     private Process proc;
     private WebDriver driver;
     private WebElement tab;
+
+    private String CALC_PATH = "C:\\Windows\\System32\\calc.exe";
+    private String WINIUM_PATH = "http://localhost:9999";
+
     @BeforeTest
     public void before() throws IOException {
         killAllRunDrivers();
         proc = new ProcessBuilder(getDriverPath()).start();
         DesktopOptions options = new DesktopOptions();
+        options.setApplicationPath(CALC_PATH);
+        driver = new WiniumDriver(new URL(WINIUM_PATH), options);
         //options.setApplicationPath(resourcesFolder() + "JDITestDesktopApp.exe");
-        options.setApplicationPath("D:\\temp\\JDI-winium2\\JDI-winium2\\TestApplications\\JDITestDesktopApp\\JDITestDesktopApp\\bin\\Debug\\JDITestDesktopApp.exe");
-        driver = new WiniumDriver(new URL("http://localhost:9999"), options);
+        //options.setApplicationPath("D:\\temp\\JDI-winium2\\JDI-winium2\\TestApplications\\JDITestDesktopApp\\JDITestDesktopApp\\bin\\Debug\\JDITestDesktopApp.exe");
+        //driver = new WiniumDriver(new URL("http://localhost:9999"), options);
         //tab = driver.findElement(By.id("JDITestDesktopApp")).findElement(By.id("tabControl"));
 
     }
