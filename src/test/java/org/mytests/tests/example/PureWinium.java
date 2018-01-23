@@ -13,6 +13,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
+import static org.mytests.uiobjects.example.enums.Utils.killAllRunDrivers;
+
 /**
  * Created by Roman_Iovlev on 1/9/2018.
  */
@@ -22,32 +24,36 @@ public class PureWinium {
     private WebElement tab;
     @BeforeTest
     public void before() throws IOException {
+        killAllRunDrivers();
         proc = new ProcessBuilder(getDriverPath()).start();
         DesktopOptions options = new DesktopOptions();
-        options.setApplicationPath(resourcesFolder() + "JDI_AUT.exe");
+        //options.setApplicationPath(resourcesFolder() + "JDITestDesktopApp.exe");
+        options.setApplicationPath("D:\\temp\\JDI-winium2\\JDI-winium2\\TestApplications\\JDITestDesktopApp\\JDITestDesktopApp\\bin\\Debug\\JDITestDesktopApp.exe");
         driver = new WiniumDriver(new URL("http://localhost:9999"), options);
-        tab = driver.findElement(By.id("tabControl"));
+        //tab = driver.findElement(By.id("JDITestDesktopApp")).findElement(By.id("tabControl"));
 
     }
     @Test
-    public void winiumTest1() throws IOException {
-        driver.findElement(By.id("tabControl")).findElement(By.id("datesTab")).click();
-        driver.findElement(By.id("tabControl")).findElement(By.id("supportTab")).click();
+    public void winiumTest1() {
+        driver.findElement(By.id("num7Button")).click();
+        driver.findElement(By.id("num8Button")).click();
+        driver.findElement(By.id("num3Button")).click();
+        driver.findElement(By.id("DatesView")).click();
     }
     @Test
-    public void winiumTest2() throws IOException {
+    public void winiumTest2() {
         driver.findElement(By.id("tabControl")).findElement(By.id("supportTab")).click();
         driver.findElement(By.id("tabControl")).findElement(By.id("datesTab")).click();
     }
     @Test
-    public void winiumTabTest1() throws IOException {
+    public void winiumTabTest1() {
         tab.findElement(By.id("datesTab")).click();
         tab.findElement(By.id("supportTab")).click();
     }
     @Test
-    public void winiumTabTest2() throws IOException {
-        tab.findElement(By.id("datesTab")).click();
+    public void winiumTabTest2() {
         tab.findElement(By.id("supportTab")).click();
+        tab.findElement(By.id("datesTab")).click();
     }
     @AfterTest
     public void after() {
